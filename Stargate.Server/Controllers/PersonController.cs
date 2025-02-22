@@ -49,6 +49,11 @@ namespace Stargate.Server.Controllers
                     Name = name
                 });
 
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
                 return this.GetResponse(result);
             }
             catch (Exception ex)

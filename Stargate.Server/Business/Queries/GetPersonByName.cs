@@ -29,7 +29,6 @@ namespace Stargate.Server.Business.Queries
                                                   .FirstOrDefaultAsync();
             if (person == null)
             {
-                // ochia - is it okay to return null here?
                 return null;
             }
 
