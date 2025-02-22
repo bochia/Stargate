@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Stargate.Server.Data.Models
 {
+    // ochia - need to delete this class from the DB if it really isnt needed.
     [Keyless]
     public class PersonAstronaut
     {
