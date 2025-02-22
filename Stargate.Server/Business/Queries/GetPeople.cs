@@ -8,7 +8,11 @@ namespace Stargate.Server.Business.Queries
 {
     public class GetPeople : IRequest<GetPeopleResult>
     {
-
+        /*
+         * ochia - in the future I would pass PageNumber and PageSize so that I could do pagination.
+         * var skip = (pageNumber - 1) * pageSize;
+         * var people = await _context.People.Skip(skip).Take(pageSize).ToListAsync();
+         */
     }
 
     public class GetPeopleHandler : IRequestHandler<GetPeople, GetPeopleResult>
