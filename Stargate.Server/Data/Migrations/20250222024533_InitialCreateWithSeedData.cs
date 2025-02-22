@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Stargate.Server.Migrations
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace Stargate.Server.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialCreateWithSeedData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -84,6 +86,25 @@ namespace Stargate.Server.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Person",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "John Doe" },
+                    { 2, "Jane Doe" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AstronautDetail",
+                columns: new[] { "Id", "CareerEndDate", "CareerStartDate", "CurrentDutyTitle", "CurrentRank", "PersonId" },
+                values: new object[] { 1, null, new DateTime(2025, 2, 21, 20, 45, 33, 266, DateTimeKind.Local).AddTicks(1160), "Commander", "1LT", 1 });
+
+            migrationBuilder.InsertData(
+                table: "AstronautDuty",
+                columns: new[] { "Id", "DutyEndDate", "DutyStartDate", "DutyTitle", "PersonId", "Rank" },
+                values: new object[] { 1, null, new DateTime(2025, 2, 21, 20, 45, 33, 266, DateTimeKind.Local).AddTicks(1225), "Commander", 1, "1LT" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AstronautDetail_PersonId",

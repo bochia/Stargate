@@ -7,7 +7,7 @@ using Stargate.Server.Data;
 
 #nullable disable
 
-namespace Stargate.Server.Migrations
+namespace Stargate.Server.Data.Migrations
 {
     [DbContext(typeof(StargateContext))]
     partial class StargateContextModelSnapshot : ModelSnapshot
@@ -46,6 +46,16 @@ namespace Stargate.Server.Migrations
                         .IsUnique();
 
                     b.ToTable("AstronautDetail");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CareerStartDate = new DateTime(2025, 2, 21, 20, 45, 33, 266, DateTimeKind.Local).AddTicks(1160),
+                            CurrentDutyTitle = "Commander",
+                            CurrentRank = "1LT",
+                            PersonId = 1
+                        });
                 });
 
             modelBuilder.Entity("Stargate.Server.Data.Models.AstronautDuty", b =>
@@ -76,6 +86,16 @@ namespace Stargate.Server.Migrations
                     b.HasIndex("PersonId");
 
                     b.ToTable("AstronautDuty");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DutyStartDate = new DateTime(2025, 2, 21, 20, 45, 33, 266, DateTimeKind.Local).AddTicks(1225),
+                            DutyTitle = "Commander",
+                            PersonId = 1,
+                            Rank = "1LT"
+                        });
                 });
 
             modelBuilder.Entity("Stargate.Server.Data.Models.Person", b =>
@@ -91,6 +111,18 @@ namespace Stargate.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Person");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "John Doe"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Jane Doe"
+                        });
                 });
 
             modelBuilder.Entity("Stargate.Server.Data.Models.PersonAstronaut", b =>
