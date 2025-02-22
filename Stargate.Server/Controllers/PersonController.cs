@@ -11,6 +11,7 @@ namespace Stargate.Server.Controllers
     public class PersonController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly string BlankNameError = "Must pass a valid name, it cannot be blank.";
         public PersonController(IMediator mediator)
         {
             _mediator = mediator;
@@ -42,6 +43,11 @@ namespace Stargate.Server.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> GetPersonByName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest(BlankNameError);
+            }
+
             try
             {
                 var result = await _mediator.Send(new GetPersonByName()
@@ -70,6 +76,11 @@ namespace Stargate.Server.Controllers
         [HttpPost("")]
         public async Task<IActionResult> CreatePerson([FromBody] string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest(BlankNameError);
+            }
+
             try
             {
                 var result = await _mediator.Send(new CreatePerson()
