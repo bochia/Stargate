@@ -3,6 +3,7 @@ using Stargate.Server.Controllers;
 using Stargate.Server.Data.Models;
 using Stargate.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using Stargate.Server.Business.Extensions;
 
 namespace Stargate.Server.Business.Queries
 {
@@ -23,9 +24,16 @@ namespace Stargate.Server.Business.Queries
         {
             var result = new GetPersonByNameResult();
 
-            var person = await _context.PersonAstronauts.FromSql($"SELECT a.Id as PersonId, a.Name, b.CurrentRank, b.CurrentDutyTitle, b.CareerStartDate, b.CareerEndDate FROM [Person] a LEFT JOIN [AstronautDetail] b on b.PersonId = a.Id WHERE '{request.Name}' = a.Name").FirstOrDefaultAsync();
+            Person? person = await _context.People.Include(x => x.AstronautDetail)
+                                                  .Where(x => x.Name == request.Name)
+                                                  .FirstOrDefaultAsync();
+            if (person == null)
+            {
+                // ochia - is it okay to return null here?
+                return null;
+            }
 
-            result.Person = person;
+            result.Person = person.ConvertToDto();
 
             return result;
         }
@@ -33,6 +41,21 @@ namespace Stargate.Server.Business.Queries
 
     public class GetPersonByNameResult : BaseResponse
     {
-        public PersonAstronaut? Person { get; set; }
+        public PersonAstronautDto? Person { get; set; }
+    }
+
+    public class PersonAstronautDto
+    {
+        public int PersonId { get; set; }
+
+        public string Name { get; set; } = string.Empty;
+
+        public string? CurrentRank { get; set; } = string.Empty;
+
+        public string? CurrentDutyTitle { get; set; } = string.Empty;
+
+        public DateTime? CareerStartDate { get; set; }
+
+        public DateTime? CareerEndDate { get; set; }
     }
 }
