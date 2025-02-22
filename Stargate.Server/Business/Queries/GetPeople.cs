@@ -3,6 +3,7 @@ using Stargate.Server.Controllers;
 using Stargate.Server.Data.Models;
 using Stargate.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using Stargate.Server.Business.Extensions;
 
 namespace Stargate.Server.Business.Queries
 {
@@ -26,9 +27,14 @@ namespace Stargate.Server.Business.Queries
         {
             var result = new GetPeopleResult();
 
-            var people = await _context.PersonAstronauts.FromSql($"SELECT a.Id as PersonId, a.Name, b.CurrentRank, b.CurrentDutyTitle, b.CareerStartDate, b.CareerEndDate FROM [Person] a LEFT JOIN [AstronautDetail] b on b.PersonId = a.Id").ToListAsync();
+            List<Person>? people = await _context.People.ToListAsync();
 
-            result.People = people;
+            if (people == null || !people.Any())
+            {
+                return result;
+            }
+
+            result.People = people.ConvertToDto();
 
             return result;
         }
@@ -36,7 +42,18 @@ namespace Stargate.Server.Business.Queries
 
     public class GetPeopleResult : BaseResponse
     {
-        public List<PersonAstronaut> People { get; set; } = new List<PersonAstronaut> { };
+        /*
+         * ochia - If we need more information we could use PersonAstronaughtDto. 
+         * But typically get all requires less data. Can use name from getall to do a get single.
+         */
+        public List<PersonDto> People { get; set; } = new List<PersonDto> { };
 
+    }
+
+    public class PersonDto
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }
