@@ -4,6 +4,7 @@ using Stargate.Server.Controllers;
 using Stargate.Server.Data.Models;
 using Stargate.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Stargate.Server.Business.Commands
 {
@@ -37,8 +38,28 @@ namespace Stargate.Server.Business.Commands
         {
             _context = context;
         }
+
+        /*
+         * ochia - going with the solution to block adding duplicates. having duplicates makes retrieval a dilemma.
+         * If names are not able to be unique, we aren't able to magically retrieve the correct person just on name alone.
+         * The burder on providing uniqueness will need to fall on the external system, by one of the following options:
+         * 1.) The external system may need to concatenate different data on their side into the name to make it unique. 
+         * 2.) (Preferred) We could ask them to retrieve people by our internal ID, that we return after we create it by name. 
+         */
         public async Task<CreatePersonResult> Handle(CreatePerson request, CancellationToken cancellationToken)
         {
+            var existingPerson = await _context.People.Where(x => x.Name == request.Name).FirstOrDefaultAsync();
+
+            if (existingPerson != null)
+            {
+                // ochia - is this the correct way to get the correct response to the user?
+                return new CreatePersonResult()
+                {
+                    Success = false,
+                    ResponseCode = (int)HttpStatusCode.BadRequest,
+                    Message = $"Person with the name '{request.Name}' already exists."
+                };
+            }
 
             var newPerson = new Person()
             {
@@ -53,7 +74,6 @@ namespace Stargate.Server.Business.Commands
             {
                 Id = newPerson.Id
             };
-
         }
     }
 
