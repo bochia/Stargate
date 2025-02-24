@@ -53,6 +53,7 @@ namespace Stargate.Server.Business.Commands
     public class CreateAstronautDutyHandler : IRequestHandler<CreateAstronautDutyRequest, CreateAstronautDutyResult>
     {
         private readonly StargateContext _context;
+        private const string RetiredDutyTitle = "RETIRED";
 
         public CreateAstronautDutyHandler(StargateContext context)
         {
@@ -62,6 +63,7 @@ namespace Stargate.Server.Business.Commands
         {
 
             Person? person = await _context.People.Include(x => x.AstronautDetail)
+                                                  .Include(x => x.AstronautDuties)
                                                   .Where(x => x.Name == request.Name)
                                                   .FirstOrDefaultAsync();
             if (person == null)
@@ -74,11 +76,9 @@ namespace Stargate.Server.Business.Commands
                 };
             }
 
-            await UpdateCurrentDetail(person, request);
+            await UpdateCurrentAstronautDetail(person, request);
             await GiveTheMostRecentDutyAnEndDate(person, request);
             int newDutyId = await AddTheNewDuty(person, request);
-
-            await _context.SaveChangesAsync();
 
             return new CreateAstronautDutyResult()
             {
@@ -89,7 +89,7 @@ namespace Stargate.Server.Business.Commands
         /**
          * Update the persons current astronaut detail to be the new duty that we are adding.
          */
-        private async Task UpdateCurrentDetail(Person person, CreateAstronautDutyRequest request)
+        private async Task UpdateCurrentAstronautDetail(Person person, CreateAstronautDutyRequest request)
         {
             if(person.AstronautDetail == null)
             {
@@ -98,7 +98,8 @@ namespace Stargate.Server.Business.Commands
                 astronautDetail.CurrentDutyTitle = request.DutyTitle;
                 astronautDetail.CurrentRank = request.Rank;
                 astronautDetail.CareerStartDate = request.DutyStartDate.Date;
-                if (request.DutyTitle == "RETIRED")
+
+                if (request.DutyTitle == RetiredDutyTitle)
                 {
                     astronautDetail.CareerEndDate = request.DutyStartDate.Date;
                 }
@@ -110,20 +111,22 @@ namespace Stargate.Server.Business.Commands
             {
                 person.AstronautDetail.CurrentDutyTitle = request.DutyTitle;
                 person.AstronautDetail.CurrentRank = request.Rank;
-                if (request.DutyTitle == "RETIRED")
+
+                if (request.DutyTitle == RetiredDutyTitle)
                 {
+                    // A Person's Career End Date is one day before the Retired Duty Start Date.
                     person.AstronautDetail.CareerEndDate = request.DutyStartDate.AddDays(-1).Date;
                 }
-                //_context.AstronautDetails.Update(astronautDetail);
             }
         }
 
         private async Task GiveTheMostRecentDutyAnEndDate(Person person, CreateAstronautDutyRequest request)
         {
-            var astronautDuty = await _context.AstronautDuties.FromSql($"SELECT * FROM [AstronautDuty] WHERE \'{person.Id}\' = PersonId Order By DutyStartDate Desc").FirstOrDefaultAsync();
+            var astronautDuty = person.AstronautDuties.OrderByDescending(x => x.DutyStartDate).FirstOrDefault();
 
             if (astronautDuty != null)
             {
+                // A Person's Previous Duty End Date is set to the day before the New Astronaut Duty Start Date when a new Astronaut Duty is received for a Person.
                 astronautDuty.DutyEndDate = request.DutyStartDate.AddDays(-1).Date;
                 _context.AstronautDuties.Update(astronautDuty);
             }
@@ -141,6 +144,8 @@ namespace Stargate.Server.Business.Commands
             };
 
             await _context.AstronautDuties.AddAsync(newAstronautDuty);
+
+            await _context.SaveChangesAsync();
 
             return newAstronautDuty.Id;
         }
