@@ -12,6 +12,26 @@ namespace Stargate.Server.Business.Queries
         public required string Name { get; set; } = string.Empty;
     }
 
+    public class GetPersonByNameResult : BaseResponse
+    {
+        public PersonAstronautDto? Person { get; set; }
+    }
+
+    public class PersonAstronautDto
+    {
+        public int PersonId { get; set; }
+
+        public string Name { get; set; } = string.Empty;
+
+        public string? CurrentRank { get; set; } = string.Empty;
+
+        public string? CurrentDutyTitle { get; set; } = string.Empty;
+
+        public DateTime? CareerStartDate { get; set; }
+
+        public DateTime? CareerEndDate { get; set; }
+    }
+
     public class GetPersonByNameHandler : IRequestHandler<GetPersonByName, GetPersonByNameResult>
     {
         private readonly StargateContext _context;
@@ -36,25 +56,5 @@ namespace Stargate.Server.Business.Queries
 
             return result;
         }
-    }
-
-    public class GetPersonByNameResult : BaseResponse
-    {
-        public PersonAstronautDto? Person { get; set; }
-    }
-
-    public class PersonAstronautDto
-    {
-        public int PersonId { get; set; }
-
-        public string Name { get; set; } = string.Empty;
-
-        public string? CurrentRank { get; set; } = string.Empty;
-
-        public string? CurrentDutyTitle { get; set; } = string.Empty;
-
-        public DateTime? CareerStartDate { get; set; }
-
-        public DateTime? CareerEndDate { get; set; }
     }
 }

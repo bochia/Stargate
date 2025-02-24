@@ -11,6 +11,12 @@ namespace Stargate.Server.Business.Queries
         public string Name { get; set; } = string.Empty;
     }
 
+    public class GetAstronautDutiesByNameResult : BaseResponse
+    {
+        public PersonAstronaut Person { get; set; }
+        public List<AstronautDuty> AstronautDuties { get; set; } = new List<AstronautDuty>();
+    }
+
     public class GetAstronautDutiesByNameHandler : IRequestHandler<GetAstronautDutiesByName, GetAstronautDutiesByNameResult>
     {
         private readonly StargateContext _context;
@@ -36,11 +42,5 @@ namespace Stargate.Server.Business.Queries
             return result;
 
         }
-    }
-
-    public class GetAstronautDutiesByNameResult : BaseResponse
-    {
-        public PersonAstronaut Person { get; set; }
-        public List<AstronautDuty> AstronautDuties { get; set; } = new List<AstronautDuty>();
     }
 }

@@ -16,6 +16,23 @@ namespace Stargate.Server.Business.Queries
          */
     }
 
+    public class GetPeopleResult : BaseResponse
+    {
+        /*
+         * ochia - If we need more information we could use PersonAstronaughtDto. 
+         * But typically get all requires less data. Can use name from getall to do a get single.
+         */
+        public List<PersonDto> People { get; set; } = new List<PersonDto> { };
+
+    }
+
+    public class PersonDto
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; } = string.Empty;
+    }
+
     public class GetPeopleHandler : IRequestHandler<GetPeople, GetPeopleResult>
     {
         public readonly StargateContext _context;
@@ -38,22 +55,5 @@ namespace Stargate.Server.Business.Queries
 
             return result;
         }
-    }
-
-    public class GetPeopleResult : BaseResponse
-    {
-        /*
-         * ochia - If we need more information we could use PersonAstronaughtDto. 
-         * But typically get all requires less data. Can use name from getall to do a get single.
-         */
-        public List<PersonDto> People { get; set; } = new List<PersonDto> { };
-
-    }
-
-    public class PersonDto
-    {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
     }
 }

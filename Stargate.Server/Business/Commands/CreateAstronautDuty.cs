@@ -18,6 +18,11 @@ namespace Stargate.Server.Business.Commands
         public DateTime DutyStartDate { get; set; }
     }
 
+    public class CreateAstronautDutyResult : BaseResponse
+    {
+        public int? Id { get; set; }
+    }
+
     public class CreateAstronautDutyPreProcessor : IRequestPreProcessor<CreateAstronautDuty>
     {
         private readonly StargateContext _context;
@@ -108,10 +113,5 @@ namespace Stargate.Server.Business.Commands
                 Id = newAstronautDuty.Id
             };
         }
-    }
-
-    public class CreateAstronautDutyResult : BaseResponse
-    {
-        public int? Id { get; set; }
     }
 }

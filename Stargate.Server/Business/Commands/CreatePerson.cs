@@ -13,6 +13,11 @@ namespace Stargate.Server.Business.Commands
         public required string Name { get; set; } = string.Empty;
     }
 
+    public class CreatePersonResult : BaseResponse
+    {
+        public int Id { get; set; }
+    }
+
     public class CreatePersonPreProcessor : IRequestPreProcessor<CreatePerson>
     {
         private readonly StargateContext _context;
@@ -77,10 +82,5 @@ namespace Stargate.Server.Business.Commands
                 Id = newPerson.Id
             };
         }
-    }
-
-    public class CreatePersonResult : BaseResponse
-    {
-        public int Id { get; set; }
     }
 }
