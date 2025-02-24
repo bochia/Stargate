@@ -15,6 +15,7 @@ builder.Services.AddDbContext<StargateContext>(options =>
 
 builder.Services.AddMediatR(cfg =>
 {
+    // ochia - need to add other pre processors here.
     cfg.AddRequestPreProcessor<CreateAstronautDutyPreProcessor>();
     cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly);
 });

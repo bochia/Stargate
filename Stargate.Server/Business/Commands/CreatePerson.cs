@@ -22,7 +22,9 @@ namespace Stargate.Server.Business.Commands
         }
         public Task Process(CreatePerson request, CancellationToken cancellationToken)
         {
-            var person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name);
+            // ochia - why do we want this? Doesnt seem to be getting hit. Does it need configuration in startup file?
+            // ochia - put a better error message here. 
+            var person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name); 
 
             if (person is not null) throw new BadHttpRequestException("Bad Request");
 

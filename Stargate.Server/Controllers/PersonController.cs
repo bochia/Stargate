@@ -17,7 +17,7 @@ namespace Stargate.Server.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetPeople()
         {
             try
@@ -73,7 +73,7 @@ namespace Stargate.Server.Controllers
             }
         }
 
-        [HttpPost("")]
+        [HttpPost]
         public async Task<IActionResult> CreatePerson([FromBody] string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -100,6 +100,37 @@ namespace Stargate.Server.Controllers
                 });
             }
 
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdatePerson([FromBody] UpdatePersonRequest updatePersonRequest)
+        {
+            if (updatePersonRequest == null)
+            {
+                return BadRequest("Request body cannot be null");
+            }
+
+            if (string.IsNullOrWhiteSpace(updatePersonRequest.CurrentName) || string.IsNullOrWhiteSpace(updatePersonRequest.NewName))
+            {
+                // ochia - improve this to be 
+                return BadRequest(BlankNameError);
+            }
+
+            try
+            {
+                var result = await _mediator.Send(updatePersonRequest);
+
+                return this.GetResponse(result);
+            }
+            catch (Exception ex)
+            {
+                return this.GetResponse(new BaseResponse()
+                {
+                    Message = ex.Message,
+                    Success = false,
+                    ResponseCode = (int)HttpStatusCode.InternalServerError
+                });
+            }
         }
     }
 }
