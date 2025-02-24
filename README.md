@@ -1,4 +1,4 @@
-﻿<!--v003-->
+<!--v003-->
 # Stargate
 
 ***
@@ -21,11 +21,12 @@ The People that exist in this system are not all Astronauts. ACTS maintains a ma
 
 The REST API is expected to do the following:
 
-1. Retrieve a person by name.
-1. Retrieve all people.
-1. Add/update a person by name.
-1. Retrieve Astronaut Duty by name.
-1. Add an Astronaut Duty.
+1. [X]Retrieve a person by name.
+1. [X]Retrieve all people.
+1. [x]Add/[X]update a person by name.
+
+1. []Retrieve Astronaut Duty by name.
+1. []Add an Astronaut Duty.
 
 ##### Implement a user interface: (Required)
 
