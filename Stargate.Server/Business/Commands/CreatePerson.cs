@@ -16,6 +16,7 @@ namespace Stargate.Server.Business.Commands
     public class CreatePersonResult : BaseResponse
     {
         public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 
     public class CreatePersonPreProcessor : IRequestPreProcessor<CreatePersonRequest>
@@ -79,7 +80,8 @@ namespace Stargate.Server.Business.Commands
 
             return new CreatePersonResult()
             {
-                Id = newPerson.Id
+                Id = newPerson.Id,
+                Name = newPerson.Name
             };
         }
     }

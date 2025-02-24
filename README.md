@@ -34,6 +34,8 @@ The UI is expected to do the following:
 
 1. Successfully run an Angular web application that demonstrates production level quality.
 1. Implement call(s) to retrieve an individual's astronaut duties.
+   [] Allow someone to see a list of People. 
+   [] Allow for searching a list of people to find a single person.
 1. Display the progress of the process and the results in a visually sophisticated and appealing manner.
 
 ## Tasks

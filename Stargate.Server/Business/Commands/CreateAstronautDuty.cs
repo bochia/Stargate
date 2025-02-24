@@ -80,6 +80,7 @@ namespace Stargate.Server.Business.Commands
             await GiveTheMostRecentDutyAnEndDate(person, request);
             int newDutyId = await AddTheNewDuty(person, request);
 
+            // ochia - should I return more data here?
             return new CreateAstronautDutyResult()
             {
                 Id = newDutyId
