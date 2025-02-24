@@ -16,7 +16,7 @@ namespace Stargate.Server.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("{personName}")]
         public async Task<IActionResult> GetAstronautDutiesByName(string personName)// ochia - rename this method based on response from questions.
         {
             try

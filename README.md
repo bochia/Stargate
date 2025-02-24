@@ -25,7 +25,7 @@ The REST API is expected to do the following:
 1. [X]Retrieve all people.
 1. [x]Add/[X]update a person by name.
 
-1. []Retrieve Astronaut Duty by name.
+1. [X]Retrieve Astronaut Duty by name.
 1. []Add an Astronaut Duty.
 
 ##### Implement a user interface: (Required)
@@ -55,10 +55,12 @@ Examine the code, find and resolve any flaws, if any exist. Identify design patt
 
 ## Rules
 
-1. A Person is uniquely identified by their Name.
-1. A Person who has not had an astronaut assignment will not have Astronaut records.
-1. A Person will only ever hold one current Astronaut Duty Title, Start Date, and Rank at a time.
-1. A Person's Current Duty will not have a Duty End Date.
-1. A Person's Previous Duty End Date is set to the day before the New Astronaut Duty Start Date when a new Astronaut Duty is received for a Person.
-1. A Person is classified as 'Retired' when a Duty Title is 'RETIRED'.
-1. A Person's Career End Date is one day before the Retired Duty Start Date.
+1. [X] A Person is uniquely identified by their Name.
+1. [X] A Person who has not had an astronaut assignment will not have Astronaut records.
+1. [X] A Person will only ever hold one current Astronaut Duty Title, Start Date, and Rank at a time.
+1. [] A Person's Current Duty will not have a Duty End Date.
+1. [] A Person's Previous Duty End Date is set to the day before the New Astronaut Duty Start Date when a new Astronaut Duty is received for a Person.
+1. [] A Person is classified as 'Retired' when a Duty Title is 'RETIRED'.
+1. [] A Person's Career End Date is one day before the Retired Duty Start Date.
+[] ochia - career and duty end date are different. 
+[] ochia - Will need logic for career start date as well. Implement in the getbyname endpoint for Person.

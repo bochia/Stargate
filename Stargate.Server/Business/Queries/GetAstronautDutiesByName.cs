@@ -3,6 +3,9 @@ using Stargate.Server.Controllers;
 using Stargate.Server.Data.Models;
 using Stargate.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using Stargate.Server.Business.Extensions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Stargate.Server.Business.Queries
 {
@@ -13,7 +16,7 @@ namespace Stargate.Server.Business.Queries
 
     public class GetAstronautDutiesByNameResult : BaseResponse
     {
-        public PersonAstronaut Person { get; set; }
+        public PersonAstronautDto Person { get; set; }
         public List<AstronautDuty> AstronautDuties { get; set; } = new List<AstronautDuty>();
     }
 
@@ -31,16 +34,25 @@ namespace Stargate.Server.Business.Queries
 
             var result = new GetAstronautDutiesByNameResult();
 
-            var person = await _context.PersonAstronauts.FromSql($"SELECT a.Id as PersonId, a.Name, b.CurrentRank, b.CurrentDutyTitle, b.CareerStartDate, b.CareerEndDate FROM [Person] a LEFT JOIN [AstronautDetail] b on b.PersonId = a.Id WHERE \'{request.Name}\' = a.Name").FirstOrDefaultAsync();
+            Person? person = await _context.People.Include(x => x.AstronautDetail)
+                                                  .Include(x => x.AstronautDuties)
+                                                  .Where(x => x.Name == request.Name)
+                                                  .FirstOrDefaultAsync();
 
-            result.Person = person;
+            if (person == null) 
+            {
+                return new GetAstronautDutiesByNameResult()
+                {
+                    Success = false,
+                    Message = $"Person with name '{request.Name}' was not found.",
+                    ResponseCode = (int)HttpStatusCode.NotFound
+                };
+            }
 
-            var duties = await _context.AstronautDuties.FromSql($"SELECT * FROM [AstronautDuty] WHERE \'{person.PersonId}\' = PersonId Order By DutyStartDate Desc").ToListAsync();
-
-            result.AstronautDuties = duties;
+            result.Person = person.ConvertToDto();
+            result.AstronautDuties = person.AstronautDuties.ToList();
 
             return result;
-
         }
     }
 }
