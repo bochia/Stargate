@@ -56,7 +56,7 @@ namespace Stargate.Server.Business.Commands
                 return new CreatePersonResult()
                 {
                     Success = false,
-                    ResponseCode = (int)HttpStatusCode.BadRequest,
+                    ResponseCode = (int)HttpStatusCode.Conflict,
                     Message = $"Person with the name '{request.Name}' already exists."
                 };
             }
