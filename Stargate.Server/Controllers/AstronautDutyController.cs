@@ -17,13 +17,13 @@ namespace Stargate.Server.Controllers
         }
 
         [HttpGet("{name}")]
-        public async Task<IActionResult> GetAstronautDutiesByName(string name)
+        public async Task<IActionResult> GetAstronautDutiesByName(string personName)// ochia - rename this method based on response from questions.
         {
             try
             {
-                var result = await _mediator.Send(new GetPersonByName()
+                var result = await _mediator.Send(new GetAstronautDutiesByName()
                 {
-                    Name = name
+                    Name = personName
                 });
 
                 return this.GetResponse(result);
@@ -39,8 +39,8 @@ namespace Stargate.Server.Controllers
             }
         }
 
-        [HttpPost("")]
-        public async Task<IActionResult> CreateAstronautDuty([FromBody] CreateAstronautDuty request)
+        [HttpPost]
+        public async Task<IActionResult> CreateAstronautDuty([FromBody] CreateAstronautDuty request) // ochia - rename this method based on response from questions.
         {
             var result = await _mediator.Send(request);
             return this.GetResponse(result);
