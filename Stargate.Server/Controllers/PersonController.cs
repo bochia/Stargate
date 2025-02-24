@@ -22,7 +22,7 @@ namespace Stargate.Server.Controllers
         {
             try
             {
-                var result = await _mediator.Send(new GetPeople()
+                var result = await _mediator.Send(new GetPeopleRequest()
                 {
 
                 });
@@ -50,7 +50,7 @@ namespace Stargate.Server.Controllers
 
             try
             {
-                var result = await _mediator.Send(new GetPersonByName()
+                var result = await _mediator.Send(new GetPersonByNameRequest()
                 {
                     Name = name
                 });
@@ -83,7 +83,7 @@ namespace Stargate.Server.Controllers
 
             try
             {
-                var result = await _mediator.Send(new CreatePerson()
+                var result = await _mediator.Send(new CreatePersonRequest()
                 {
                     Name = name
                 });

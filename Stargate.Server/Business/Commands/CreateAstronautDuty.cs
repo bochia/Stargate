@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Stargate.Server.Business.Commands
 {
-    public class CreateAstronautDuty : IRequest<CreateAstronautDutyResult>
+    public class CreateAstronautDutyRequest : IRequest<CreateAstronautDutyResult>
     {
         public required string Name { get; set; }
 
@@ -23,7 +23,7 @@ namespace Stargate.Server.Business.Commands
         public int? Id { get; set; }
     }
 
-    public class CreateAstronautDutyPreProcessor : IRequestPreProcessor<CreateAstronautDuty>
+    public class CreateAstronautDutyPreProcessor : IRequestPreProcessor<CreateAstronautDutyRequest>
     {
         private readonly StargateContext _context;
 
@@ -32,7 +32,7 @@ namespace Stargate.Server.Business.Commands
             _context = context;
         }
 
-        public Task Process(CreateAstronautDuty request, CancellationToken cancellationToken)
+        public Task Process(CreateAstronautDutyRequest request, CancellationToken cancellationToken)
         {
             var person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name);
 
@@ -46,7 +46,7 @@ namespace Stargate.Server.Business.Commands
         }
     }
 
-    public class CreateAstronautDutyHandler : IRequestHandler<CreateAstronautDuty, CreateAstronautDutyResult>
+    public class CreateAstronautDutyHandler : IRequestHandler<CreateAstronautDutyRequest, CreateAstronautDutyResult>
     {
         private readonly StargateContext _context;
 
@@ -54,7 +54,7 @@ namespace Stargate.Server.Business.Commands
         {
             _context = context;
         }
-        public async Task<CreateAstronautDutyResult> Handle(CreateAstronautDuty request, CancellationToken cancellationToken)
+        public async Task<CreateAstronautDutyResult> Handle(CreateAstronautDutyRequest request, CancellationToken cancellationToken)
         {
 
             var person = await _context.People.FromSql($"SELECT * FROM [Person] WHERE \'{request.Name}\' = Name").FirstOrDefaultAsync();

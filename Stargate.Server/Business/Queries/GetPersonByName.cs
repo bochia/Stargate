@@ -7,7 +7,7 @@ using Stargate.Server.Business.Extensions;
 
 namespace Stargate.Server.Business.Queries
 {
-    public class GetPersonByName : IRequest<GetPersonByNameResult>
+    public class GetPersonByNameRequest : IRequest<GetPersonByNameResult>
     {
         public required string Name { get; set; } = string.Empty;
     }
@@ -32,7 +32,7 @@ namespace Stargate.Server.Business.Queries
         public DateTime? CareerEndDate { get; set; }
     }
 
-    public class GetPersonByNameHandler : IRequestHandler<GetPersonByName, GetPersonByNameResult>
+    public class GetPersonByNameHandler : IRequestHandler<GetPersonByNameRequest, GetPersonByNameResult>
     {
         private readonly StargateContext _context;
         public GetPersonByNameHandler(StargateContext context)
@@ -40,7 +40,7 @@ namespace Stargate.Server.Business.Queries
             _context = context;
         }
 
-        public async Task<GetPersonByNameResult> Handle(GetPersonByName request, CancellationToken cancellationToken)
+        public async Task<GetPersonByNameResult> Handle(GetPersonByNameRequest request, CancellationToken cancellationToken)
         {
             var result = new GetPersonByNameResult();
 

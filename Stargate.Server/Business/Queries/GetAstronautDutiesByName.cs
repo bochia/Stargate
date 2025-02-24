@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Stargate.Server.Business.Queries
 {
-    public class GetAstronautDutiesByName : IRequest<GetAstronautDutiesByNameResult>
+    public class GetAstronautDutiesByNameRequest : IRequest<GetAstronautDutiesByNameResult>
     {
         public string Name { get; set; } = string.Empty;
     }
@@ -17,7 +17,7 @@ namespace Stargate.Server.Business.Queries
         public List<AstronautDuty> AstronautDuties { get; set; } = new List<AstronautDuty>();
     }
 
-    public class GetAstronautDutiesByNameHandler : IRequestHandler<GetAstronautDutiesByName, GetAstronautDutiesByNameResult>
+    public class GetAstronautDutiesByNameHandler : IRequestHandler<GetAstronautDutiesByNameRequest, GetAstronautDutiesByNameResult>
     {
         private readonly StargateContext _context;
 
@@ -26,7 +26,7 @@ namespace Stargate.Server.Business.Queries
             _context = context;
         }
 
-        public async Task<GetAstronautDutiesByNameResult> Handle(GetAstronautDutiesByName request, CancellationToken cancellationToken)
+        public async Task<GetAstronautDutiesByNameResult> Handle(GetAstronautDutiesByNameRequest request, CancellationToken cancellationToken)
         {
 
             var result = new GetAstronautDutiesByNameResult();

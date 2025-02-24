@@ -7,7 +7,7 @@ using Stargate.Server.Business.Extensions;
 
 namespace Stargate.Server.Business.Queries
 {
-    public class GetPeople : IRequest<GetPeopleResult>
+    public class GetPeopleRequest : IRequest<GetPeopleResult>
     {
         /*
          * ochia - in the future I would pass PageNumber and PageSize so that I could do pagination.
@@ -33,14 +33,14 @@ namespace Stargate.Server.Business.Queries
         public string Name { get; set; } = string.Empty;
     }
 
-    public class GetPeopleHandler : IRequestHandler<GetPeople, GetPeopleResult>
+    public class GetPeopleHandler : IRequestHandler<GetPeopleRequest, GetPeopleResult>
     {
         public readonly StargateContext _context;
         public GetPeopleHandler(StargateContext context)
         {
             _context = context;
         }
-        public async Task<GetPeopleResult> Handle(GetPeople request, CancellationToken cancellationToken)
+        public async Task<GetPeopleResult> Handle(GetPeopleRequest request, CancellationToken cancellationToken)
         {
             var result = new GetPeopleResult();
 

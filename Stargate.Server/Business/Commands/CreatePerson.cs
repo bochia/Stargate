@@ -8,7 +8,7 @@ using System.Net;
 
 namespace Stargate.Server.Business.Commands
 {
-    public class CreatePerson : IRequest<CreatePersonResult>
+    public class CreatePersonRequest : IRequest<CreatePersonResult>
     {
         public required string Name { get; set; } = string.Empty;
     }
@@ -18,14 +18,14 @@ namespace Stargate.Server.Business.Commands
         public int Id { get; set; }
     }
 
-    public class CreatePersonPreProcessor : IRequestPreProcessor<CreatePerson>
+    public class CreatePersonPreProcessor : IRequestPreProcessor<CreatePersonRequest>
     {
         private readonly StargateContext _context;
         public CreatePersonPreProcessor(StargateContext context)
         {
             _context = context;
         }
-        public Task Process(CreatePerson request, CancellationToken cancellationToken)
+        public Task Process(CreatePersonRequest request, CancellationToken cancellationToken)
         {
             // ochia - why do we want this? Doesnt seem to be getting hit. Does it need configuration in startup file?
             // ochia - put a better error message here. 
@@ -37,7 +37,7 @@ namespace Stargate.Server.Business.Commands
         }
     }
 
-    public class CreatePersonHandler : IRequestHandler<CreatePerson, CreatePersonResult>
+    public class CreatePersonHandler : IRequestHandler<CreatePersonRequest, CreatePersonResult>
     {
         private readonly StargateContext _context;
 
@@ -53,7 +53,7 @@ namespace Stargate.Server.Business.Commands
          * 1.) The external system may need to concatenate different data on their side into the name to make it unique. 
          * 2.) (Preferred) We could ask them to retrieve people by our internal ID, that we return after we create it by name. 
          */
-        public async Task<CreatePersonResult> Handle(CreatePerson request, CancellationToken cancellationToken)
+        public async Task<CreatePersonResult> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
         {
             var existingPerson = await _context.People.Where(x => x.Name == request.Name).FirstOrDefaultAsync();
 
