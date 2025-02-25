@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PersonDetailsComponent {
   name: string = '';
-  person: PersonAstronautDto | undefined;
+  person: PersonAstronautDto | null = null;
 
   constructor(private peopleService: PeopleService, private route: ActivatedRoute) {
     this.route.params.subscribe((params) => {
