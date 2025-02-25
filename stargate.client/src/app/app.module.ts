@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PersonDirectoryComponent } from './person-directory/person-directory.component';
 import { HomeComponent } from './home/home.component';
+import { PersonDetailsComponent } from './person-details/person-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     PersonDirectoryComponent,
-    HomeComponent
+    HomeComponent,
+    PersonDetailsComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
