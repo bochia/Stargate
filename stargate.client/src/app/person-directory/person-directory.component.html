@@ -1,1 +1,29 @@
 <p>person-directory works!</p>
+
+<div class="container mt-4">
+  <h2>People in the Astronaut Career Tracking System</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Person ID</th>
+        <th>Name</th>
+        <th>Current Rank</th>
+        <th>Current Duty Title</th>
+        <th>Career Start Date</th>
+        <th>Career End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through people array and display each person -->
+      <tr *ngFor="let person of people">
+        <td>{{ person.personId }}</td>
+        <td>{{ person.name }}</td>
+        <td>{{ person.currentRank }}</td>
+        <td>{{ person.currentDutyTitle }}</td>
+        <td>{{ person.careerStartDate | date:'shortDate' }}</td>
+        <td>{{ person.careerEndDate | date:'shortDate' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
