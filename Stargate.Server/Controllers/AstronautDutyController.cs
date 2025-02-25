@@ -45,5 +45,8 @@ namespace Stargate.Server.Controllers
             var result = await _mediator.Send(request);
             return this.GetResponse(result);
         }
+
+        //ochia - would like to be able to update duties.
+        //ochia - would like to be able to delete duties.
     }
 }

@@ -30,7 +30,7 @@ export class PersonDirectoryComponent {
     }
 
     // make it case insensitive for searching b/c its more friend to the user.
-    this.filteredPeople = this.allPeople?.filter(x => x.name.toLowerCase().startsWith(searchText.toLowerCase())) ?? null;
+    this.filteredPeople = this.allPeople?.filter(x => x.name.toLowerCase().includes(searchText.toLowerCase())) ?? null;
   }
 
   getValueForUI(value: any): string {

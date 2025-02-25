@@ -3,7 +3,7 @@
 
   <div class="row g-2 mt-4">
     <div class="col-auto">
-      <input type="text" #inputRef class="form-control" placeholder="Enter a name" />
+      <input type="text" class="form-control" #inputRef (keyup.enter)="filterTable(inputRef.value)" placeholder="Enter a name" />
     </div>
     <div class="col-auto">
       <button (click)="filterTable(inputRef.value)" class="btn btn-primary">Search</button>

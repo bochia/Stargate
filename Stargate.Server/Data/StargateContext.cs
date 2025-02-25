@@ -11,6 +11,7 @@ namespace Stargate.Server.Data
         public DbSet<AstronautDetail> AstronautDetails { get; set; }
         public DbSet<AstronautDuty> AstronautDuties { get; set; }
 
+        // ochia - would like to add normalization for duty info, like rank and title.
 
         public StargateContext(DbContextOptions<StargateContext> options)
         : base(options)

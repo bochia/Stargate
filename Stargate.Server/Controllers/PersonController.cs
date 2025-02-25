@@ -133,5 +133,7 @@ namespace Stargate.Server.Controllers
                 });
             }
         }
+
+        //ochia - would like to add a delete action.
     }
 }
