@@ -11,9 +11,9 @@ The People that exist in this system are not all Astronauts. ACTS maintains a ma
 
 ## Definitions
 
-1. A person's astronaut assignment is the Astronaut Duty.
-1. A person's list of astronaut assignments is stored in the Astronaut Duty table.
-1. A person's current astronaut information is stored in the Astronaut Detail table.
+1. [X] A person's astronaut assignment is the Astronaut Duty.
+1. [X] A person's list of astronaut assignments is stored in the Astronaut Duty table.
+1. [X] A person's current astronaut information is stored in the Astronaut Detail table.
 
 ## Requirements
 
@@ -35,7 +35,9 @@ The UI is expected to do the following:
 1. Successfully run an Angular web application that demonstrates production level quality.
 1. Implement call(s) to retrieve an individual's astronaut duties.
    [] Allow someone to see a list of People. 
+      [] Allow for the user to get their duties from this point. Transfer to a new page.
    [] Allow for searching a list of people to find a single person.
+      [] Allow for the user to get their duties from this point. Transfer to a new page.
 1. Display the progress of the process and the results in a visually sophisticated and appealing manner.
 
 ## Tasks
@@ -43,10 +45,10 @@ The UI is expected to do the following:
 Overview
 Examine the code, find and resolve any flaws, if any exist. Identify design patterns and follow or change them. Provide fix(es) and be prepared to describe the changes.
 
-1. Generate the database
+1. [X] Generate the database
    * This is your source and storage location
-1. Enforce the rules
-1. Improve defensive coding
+1. [X] Enforce the rules
+1. [X] Improve defensive coding
 1. Add unit tests
    * identify the most impactful methods requiring tests
    * reach >50% code coverage
