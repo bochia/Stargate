@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PersonAstronautDto } from '../models/PersonAstronautDto';
-import { PeopleService } from '../people.service';
+import { PeopleService } from '../services/people.service';
 
 @Component({
   selector: 'acts-person-directory',

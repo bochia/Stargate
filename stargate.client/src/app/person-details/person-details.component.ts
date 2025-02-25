@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PeopleService } from '../people.service';
+import { PeopleService } from '../services/people.service';
 import { PersonAstronautDto } from '../person-directory/person-directory.component';
 import { ActivatedRoute } from '@angular/router';
 

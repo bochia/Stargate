@@ -1,8 +1,7 @@
 <div class="container">
   <div *ngIf="person">
-    <h2>Person Details</h2>
+    <h2>{{ person.name }}</h2>
     <p><strong>Person ID:</strong> {{ person.personId }}</p>
-    <p><strong>Name:</strong> {{ person.name }}</p>
 
     <p>
       <strong>Current Rank:</strong> {{ getValueForUI(person.currentRank)}}
