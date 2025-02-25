@@ -11,23 +11,23 @@ import { DutyService } from '../services/duty.service';
   styleUrl: './person-details.component.css'
 })
 export class PersonDetailsComponent {
-  name: string = '';
+  id: number = 0;
   person: PersonAstronautDto | null = null;
   duties: AstronautDutyDto[] | null = null;
 
   constructor(private peopleService: PeopleService, private dutyService: DutyService, private route: ActivatedRoute) {
     this.route.params.subscribe((params) => {
-      this.name = params['name'] ?? '';
+      this.id = params['id'] ?? '';
     });
   }
 
   ngOnInit() {
-    if (this.name) {
-      this.peopleService.getPerson(this.name).subscribe(apiResponse => {
+    if (this.id > 0) {
+      this.peopleService.getPerson(this.id).subscribe(apiResponse => {
         this.person = apiResponse.person;
       });
 
-      this.dutyService.getAstronautDutiesByName(this.name).subscribe(apiResponse => {
+      this.dutyService.getAstronautDutiesByPersonId(this.id).subscribe(apiResponse => {
         console.log(apiResponse.astronautDuties);
         this.duties = apiResponse.astronautDuties;
       })

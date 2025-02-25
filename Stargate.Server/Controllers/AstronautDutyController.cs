@@ -16,15 +16,14 @@ namespace Stargate.Server.Controllers
             _mediator = mediator;
         }
 
-        // ochia - If I had more time I would change this to go off of the ID of the person.
-        [HttpGet("{personName}")]
-        public async Task<IActionResult> GetAstronautDutiesByName(string personName)
+        [HttpGet("{personId}")]
+        public async Task<IActionResult> GetAstronautDutiesByPersonId(int personId)
         {
             try
             {
-                var result = await _mediator.Send(new GetAstronautDutiesByNameRequest()
+                var result = await _mediator.Send(new GetAstronautDutiesByPersonIdRequest()
                 {
-                    Name = personName
+                    PersonId = personId
                 });
 
                 return this.GetResponse(result);

@@ -16,8 +16,8 @@ export class PeopleService {
     return this.httpClient.get<GetPeopleApiResponse>(`/person`);
   }
 
-  getPerson(name: string): Observable<GetPersonApiResponse> {
+  getPerson(id: number): Observable<GetPersonApiResponse> {
     // ochia - should put defensive code here.
-    return this.httpClient.get<GetPersonApiResponse>(`/person/${name}`);
+    return this.httpClient.get<GetPersonApiResponse>(`/person/${id}`);
   }
 }

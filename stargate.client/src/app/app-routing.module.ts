@@ -7,7 +7,7 @@ import { PersonDetailsComponent } from './person-details/person-details.componen
 const routes: Routes = [
   { path: 'home', component: HomeComponent, title: "Home - ACTS" },
   { path: 'directory', component: PersonDirectoryComponent, title: "Directory" },
-  { path: 'people/:name', component: PersonDetailsComponent, title: "Person Details"},
+  { path: 'people/:id', component: PersonDetailsComponent, title: "Person Details"},
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 

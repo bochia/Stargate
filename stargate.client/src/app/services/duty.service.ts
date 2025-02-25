@@ -10,8 +10,8 @@ export class DutyService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAstronautDutiesByName(name: string): Observable<GetAstronautDutiesResponse> {
+  getAstronautDutiesByPersonId(personId: number): Observable<GetAstronautDutiesResponse> {
     // ochia - should have defensive coding here.
-    return this.httpClient.get<GetAstronautDutiesResponse>(`/astronautduty/${name}`)
+    return this.httpClient.get<GetAstronautDutiesResponse>(`/astronautduty/${personId}`)
   }
 }

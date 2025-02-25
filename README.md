@@ -33,9 +33,9 @@ The REST API is expected to do the following:
 The UI is expected to do the following:
 
 1. Successfully run an Angular web application that demonstrates production level quality.
-1. Implement call(s) to retrieve an individual's astronaut duties.
-   [] Allow someone to see a list of People. 
-      [] Allow for the user to get their duties from this point. Transfer to a new page.
+1. [X]Implement call(s) to retrieve an individual's astronaut duties.
+   [X] Allow someone to see a list of People. 
+      [X] Allow for the user to get their duties from this point. Transfer to a new page.
    [] Allow for searching a list of people to find a single person.
       [] Allow for the user to get their duties from this point. Transfer to a new page.
 1. Display the progress of the process and the results in a visually sophisticated and appealing manner.

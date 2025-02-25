@@ -12,6 +12,8 @@ namespace Stargate.Server.Controllers
     {
         private readonly IMediator _mediator;
         private readonly string BlankNameError = "Must pass a valid name, it cannot be blank.";
+        private readonly string InvalidIdError =  "Id must be greater than zero.";
+
         public PersonController(IMediator mediator)
         {
             _mediator = mediator;
@@ -40,20 +42,19 @@ namespace Stargate.Server.Controllers
             }
         }
 
-        // ochia - If I had more time I would change this to go off of the ID of the person.
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetPersonByName(string name)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPersonById(int id)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (id <= 0 )
             {
-                return BadRequest(BlankNameError);
+                return BadRequest(InvalidIdError);
             }
 
             try
             {
-                var result = await _mediator.Send(new GetPersonByNameRequest()
+                var result = await _mediator.Send(new GetPersonByIdRequest()
                 {
-                    Name = name
+                    Id = id
                 });
 
                 if (result == null)

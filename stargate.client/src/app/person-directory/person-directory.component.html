@@ -22,7 +22,7 @@
         <td>{{ getValueForUI(person.currentDutyTitle) }}</td>
         <td>{{ getValueForUI(person.careerStartDate | date:'shortDate') }}</td>
         <td>{{ getValueForUI(person.careerEndDate | date:'shortDate') }}</td>
-        <td><button routerLink="{{'/people/' + person.name}}" class="btn-primary">Details</button></td>
+        <td><button routerLink="{{'/people/' + person.personId}}" class="btn-primary">Details</button></td>
       </tr>
     </tbody>
   </table>

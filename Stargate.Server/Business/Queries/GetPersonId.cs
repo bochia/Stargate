@@ -7,12 +7,12 @@ using Stargate.Server.Business.Extensions;
 
 namespace Stargate.Server.Business.Queries
 {
-    public class GetPersonByNameRequest : IRequest<GetPersonByNameResult>
+    public class GetPersonByIdRequest : IRequest<GetPersonByIdResult>
     {
-        public required string Name { get; set; } = string.Empty;
+        public int Id { get; set; }
     }
 
-    public class GetPersonByNameResult : BaseResponse
+    public class GetPersonByIdResult : BaseResponse
     {
         public PersonAstronautDto? Person { get; set; }
     }
@@ -32,20 +32,20 @@ namespace Stargate.Server.Business.Queries
         public DateTime? CareerEndDate { get; set; }
     }
 
-    public class GetPersonByNameHandler : IRequestHandler<GetPersonByNameRequest, GetPersonByNameResult>
+    public class GetPersonByIdHandler : IRequestHandler<GetPersonByIdRequest, GetPersonByIdResult>
     {
         private readonly StargateContext _context;
-        public GetPersonByNameHandler(StargateContext context)
+        public GetPersonByIdHandler(StargateContext context)
         {
             _context = context;
         }
 
-        public async Task<GetPersonByNameResult> Handle(GetPersonByNameRequest request, CancellationToken cancellationToken)
+        public async Task<GetPersonByIdResult> Handle(GetPersonByIdRequest request, CancellationToken cancellationToken)
         {
-            var result = new GetPersonByNameResult();
+            var result = new GetPersonByIdResult();
 
             Person? person = await _context.People.Include(x => x.AstronautDetail)
-                                                  .Where(x => x.Name == request.Name)
+                                                  .Where(x => x.Id == request.Id)
                                                   .FirstOrDefaultAsync();
             if (person == null)
             {

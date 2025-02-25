@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Stargate.Server.Business.Queries
 {
-    public class GetAstronautDutiesByNameRequest : IRequest<GetAstronautDutiesByNameResult>
+    public class GetAstronautDutiesByPersonIdRequest : IRequest<GetAstronautDutiesByPersonIdResult>
     {
-        public string Name { get; set; } = string.Empty;
+        public int PersonId { get; set; }
     }
 
-    public class GetAstronautDutiesByNameResult : BaseResponse
+    public class GetAstronautDutiesByPersonIdResult : BaseResponse
     {
         public List<AstronautDutyDto> AstronautDuties { get; set; } = new List<AstronautDutyDto>();
     }
@@ -35,31 +35,31 @@ namespace Stargate.Server.Business.Queries
 
     }
 
-    public class GetAstronautDutiesByNameHandler : IRequestHandler<GetAstronautDutiesByNameRequest, GetAstronautDutiesByNameResult>
+    public class GetAstronautDutiesByPersonIdHandler : IRequestHandler<GetAstronautDutiesByPersonIdRequest, GetAstronautDutiesByPersonIdResult>
     {
         private readonly StargateContext _context;
 
-        public GetAstronautDutiesByNameHandler(StargateContext context)
+        public GetAstronautDutiesByPersonIdHandler(StargateContext context)
         {
             _context = context;
         }
 
-        public async Task<GetAstronautDutiesByNameResult> Handle(GetAstronautDutiesByNameRequest request, CancellationToken cancellationToken)
+        public async Task<GetAstronautDutiesByPersonIdResult> Handle(GetAstronautDutiesByPersonIdRequest request, CancellationToken cancellationToken)
         {
 
-            var result = new GetAstronautDutiesByNameResult();
+            var result = new GetAstronautDutiesByPersonIdResult();
 
             Person? person = await _context.People.Include(x => x.AstronautDetail)
                                                   .Include(x => x.AstronautDuties)
-                                                  .Where(x => x.Name == request.Name)
+                                                  .Where(x => x.Id == request.PersonId)
                                                   .FirstOrDefaultAsync();
 
             if (person == null) 
             {
-                return new GetAstronautDutiesByNameResult()
+                return new GetAstronautDutiesByPersonIdResult()
                 {
                     Success = false,
-                    Message = $"Person with name '{request.Name}' was not found.",
+                    Message = $"Person with Id '{request.PersonId}' was not found.",
                     ResponseCode = (int)HttpStatusCode.NotFound
                 };
             }
