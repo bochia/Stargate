@@ -114,7 +114,6 @@ namespace Stargate.Server.Controllers
 
             if (string.IsNullOrWhiteSpace(updatePersonRequest.CurrentName) || string.IsNullOrWhiteSpace(updatePersonRequest.NewName))
             {
-                // ochia - improve this to be 
                 return BadRequest(BlankNameError);
             }
 

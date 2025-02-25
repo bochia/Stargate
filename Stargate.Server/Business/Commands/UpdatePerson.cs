@@ -31,8 +31,6 @@
 
         public Task Process(UpdatePersonRequest request, CancellationToken cancellationToken)
         {
-            // ochia - do I want to do anything here?
-
             return Task.CompletedTask;
         }
     }
@@ -52,7 +50,6 @@
 
             if (existingPerson == null)
             {
-                // ochia - is this the correct way to get the correct response to the user?
                 return new UpdatePersonResult()
                 {
                     Success = false,

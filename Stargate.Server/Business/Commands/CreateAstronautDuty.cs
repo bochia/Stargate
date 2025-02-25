@@ -40,8 +40,6 @@ namespace Stargate.Server.Business.Commands
 
             if (person is null) throw new BadHttpRequestException("Bad Request");
 
-
-            // ochia - need to validate this logic make sense.
             var verifyNoPreviousDuty = _context.AstronautDuties.FirstOrDefault(z => z.DutyTitle == request.DutyTitle && z.DutyStartDate == request.DutyStartDate);
 
             if (verifyNoPreviousDuty is not null) throw new BadHttpRequestException("Bad Request");
@@ -80,7 +78,6 @@ namespace Stargate.Server.Business.Commands
             await GiveTheMostRecentDutyAnEndDate(person, request);
             int newDutyId = await AddTheNewDuty(person, request);
 
-            // ochia - should I return more data here?
             return new CreateAstronautDutyResult()
             {
                 Id = newDutyId
