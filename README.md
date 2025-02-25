@@ -1,4 +1,4 @@
-<!--v003-->
+﻿<!--v003-->
 # Stargate
 
 ***
@@ -11,9 +11,9 @@ The People that exist in this system are not all Astronauts. ACTS maintains a ma
 
 ## Definitions
 
-1. [X] A person's astronaut assignment is the Astronaut Duty.
-1. [X] A person's list of astronaut assignments is stored in the Astronaut Duty table.
-1. [X] A person's current astronaut information is stored in the Astronaut Detail table.
+1. A person's astronaut assignment is the Astronaut Duty.
+1. A person's current astronaut information is stored in the Astronaut Detail table.
+1. A person's list of astronaut assignments is stored in the Astronaut Duty table.
 
 ## Requirements
 
@@ -21,23 +21,18 @@ The People that exist in this system are not all Astronauts. ACTS maintains a ma
 
 The REST API is expected to do the following:
 
-1. [X]Retrieve a person by name.
-1. [X]Retrieve all people.
-1. [x]Add/[X]update a person by name.
-
-1. [X]Retrieve Astronaut Duty by name.
-1. [X]Add an Astronaut Duty.
+1. Retrieve a person by name.
+1. Retrieve all people.
+1. Add/update a person by name.
+1. Retrieve Astronaut Duty by name.
+1. Add an Astronaut Duty.
 
 ##### Implement a user interface: (Required)
 
 The UI is expected to do the following:
 
 1. Successfully run an Angular web application that demonstrates production level quality.
-1. [X]Implement call(s) to retrieve an individual's astronaut duties.
-   [X] Allow someone to see a list of People. 
-      [X] Allow for the user to get their duties from this point. Transfer to a new page.
-   [] Allow for searching a list of people to find a single person.
-      [] Allow for the user to get their duties from this point. Transfer to a new page.
+1. Implement call(s) to retrieve an individual's astronaut duties.
 1. Display the progress of the process and the results in a visually sophisticated and appealing manner.
 
 ## Tasks
@@ -45,10 +40,10 @@ The UI is expected to do the following:
 Overview
 Examine the code, find and resolve any flaws, if any exist. Identify design patterns and follow or change them. Provide fix(es) and be prepared to describe the changes.
 
-1. [X] Generate the database
+1. Generate the database
    * This is your source and storage location
-1. [X] Enforce the rules
-1. [X] Improve defensive coding
+1. Enforce the rules
+1. Improve defensive coding
 1. Add unit tests
    * identify the most impactful methods requiring tests
    * reach >50% code coverage
@@ -59,12 +54,10 @@ Examine the code, find and resolve any flaws, if any exist. Identify design patt
 
 ## Rules
 
-1. [X] A Person is uniquely identified by their Name.
-1. [X] A Person who has not had an astronaut assignment will not have Astronaut records.
-1. [X] A Person will only ever hold one current Astronaut Duty Title, Start Date, and Rank at a time.
-1. [X] A Person's Current Duty will not have a Duty End Date.
-1. [X] A Person's Previous Duty End Date is set to the day before the New Astronaut Duty Start Date when a new Astronaut Duty is received for a Person.
-1. [X] A Person is classified as 'Retired' when a Duty Title is 'RETIRED'.
-1. [X] A Person's Career End Date is one day before the Retired Duty Start Date.
-[] ochia - career and duty end date are different. 
-[] ochia - Will need logic for career start date as well. Implement in the getbyname endpoint for Person.
+1. A Person is uniquely identified by their Name.
+1. A Person who has not had an astronaut assignment will not have Astronaut records.
+1. A Person will only ever hold one current Astronaut Duty Title, Start Date, and Rank at a time.
+1. A Person's Current Duty will not have a Duty End Date.
+1. A Person's Previous Duty End Date is set to the day before the New Astronaut Duty Start Date when a new Astronaut Duty is received for a Person.
+1. A Person is classified as 'Retired' when a Duty Title is 'RETIRED'.
+1. A Person's Career End Date is one day before the Retired Duty Start Date.
