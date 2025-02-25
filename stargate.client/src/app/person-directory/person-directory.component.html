@@ -12,6 +12,7 @@
         <th>Current Duty Title</th>
         <th>Career Start Date</th>
         <th>Career End Date</th>
+        <th>More Info</th>
       </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
         <td>{{ person.currentDutyTitle }}</td>
         <td>{{ person.careerStartDate | date:'shortDate' }}</td>
         <td>{{ person.careerEndDate | date:'shortDate' }}</td>
+        <td><button class="btn-primary">Details</button></td>
       </tr>
     </tbody>
   </table>
