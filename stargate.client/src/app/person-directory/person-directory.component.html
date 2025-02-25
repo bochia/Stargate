@@ -18,10 +18,10 @@
       <tr *ngFor="let person of people">
         <td>{{ person.personId }}</td>
         <td>{{ person.name }}</td>
-        <td>{{ person.currentRank }}</td>
-        <td>{{ person.currentDutyTitle }}</td>
-        <td>{{ person.careerStartDate | date:'shortDate' }}</td>
-        <td>{{ person.careerEndDate | date:'shortDate' }}</td>
+        <td>{{ getValueForUI(person.currentRank) }}</td>
+        <td>{{ getValueForUI(person.currentDutyTitle) }}</td>
+        <td>{{ getValueForUI(person.careerStartDate | date:'shortDate') }}</td>
+        <td>{{ getValueForUI(person.careerEndDate | date:'shortDate') }}</td>
         <td><button routerLink="{{'/people/' + person.name}}" class="btn-primary">Details</button></td>
       </tr>
     </tbody>

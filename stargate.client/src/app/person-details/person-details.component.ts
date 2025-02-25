@@ -27,4 +27,12 @@ export class PersonDetailsComponent {
       });
     }
   }
+
+  getValueForUI(value: any): string {
+    if (!value) {
+      return 'N/A'
+    }
+
+    return value;
+  }
 }

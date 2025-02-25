@@ -1,23 +1,23 @@
 <div class="container">
   <div *ngIf="person">
-    <h2>Person Astronaut Details</h2>
+    <h2>Person Details</h2>
     <p><strong>Person ID:</strong> {{ person.personId }}</p>
     <p><strong>Name:</strong> {{ person.name }}</p>
 
-    <p *ngIf="person.currentRank">
-      <strong>Current Rank:</strong> {{ person.currentRank }}
+    <p>
+      <strong>Current Rank:</strong> {{ getValueForUI(person.currentRank)}}
     </p>
 
-    <p *ngIf="person.currentDutyTitle">
-      <strong>Current Duty Title:</strong> {{ person.currentDutyTitle }}
+    <p>
+      <strong>Current Duty Title:</strong> {{ getValueForUI(person.currentDutyTitle)}}
     </p>
 
-    <p *ngIf="person.careerStartDate">
-      <strong>Career Start Date:</strong> {{ person.careerStartDate | date:'mediumDate' }}
+    <p>
+      <strong>Career Start Date:</strong> {{ getValueForUI(person.careerStartDate | date:'mediumDate') }}
     </p>
 
-    <p *ngIf="person.careerEndDate">
-      <strong>Career End Date:</strong> {{ person.careerEndDate | date:'mediumDate' }}
+    <p>
+      <strong>Career End Date:</strong> {{ getValueForUI(person.careerEndDate | date:'mediumDate')}}
     </p>
   </div>
 
