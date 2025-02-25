@@ -22,15 +22,8 @@ namespace Stargate.Server.Business.Queries
          * ochia - If we need more information we could use PersonAstronaughtDto. 
          * But typically get all requires less data. Can use name from getall to do a get single.
          */
-        public List<PersonDto> People { get; set; } = new List<PersonDto> { };
+        public List<PersonAstronautDto> People { get; set; } = new List<PersonAstronautDto> { };
 
-    }
-
-    public class PersonDto
-    {
-        public int Id { get; set; }
-
-        public string Name { get; set; } = string.Empty;
     }
 
     public class GetPeopleHandler : IRequestHandler<GetPeopleRequest, GetPeopleResult>
@@ -44,7 +37,7 @@ namespace Stargate.Server.Business.Queries
         {
             var result = new GetPeopleResult();
 
-            List<Person>? people = await _context.People.ToListAsync();
+            List<Person>? people = await _context.People.Include(x => x.AstronautDetail).ToListAsync();
 
             if (people == null || !people.Any())
             {

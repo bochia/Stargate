@@ -27,20 +27,31 @@
             return personAstronautDto;
         }
 
-        public static List<PersonDto> ConvertToDto(this List<Person> persons) 
+        public static List<PersonAstronautDto> ConvertToDto(this List<Person> persons) 
         {
-            List<PersonDto> personDtos = new List<PersonDto>();
+            List<PersonAstronautDto> personAstronautDtos = new List<PersonAstronautDto>();
 
             foreach (var person in persons) 
             {
-                personDtos.Add(new PersonDto()
+                var personAstronautDto = new PersonAstronautDto()
                 {
-                    Id = person.Id,
+                    PersonId = person.Id,
                     Name = person.Name,
-                });
+                };
+
+
+                if (person.AstronautDetail != null)
+                {
+                    personAstronautDto.CurrentRank = person.AstronautDetail.CurrentRank;
+                    personAstronautDto.CurrentDutyTitle = person.AstronautDetail.CurrentDutyTitle;
+                    personAstronautDto.CareerStartDate = person.AstronautDetail.CareerStartDate;
+                    personAstronautDto.CareerEndDate = person.AstronautDetail.CareerEndDate;
+                }
+
+                personAstronautDtos.Add(personAstronautDto); 
             }
 
-            return personDtos;
+            return personAstronautDtos;
         }
     }
 }
