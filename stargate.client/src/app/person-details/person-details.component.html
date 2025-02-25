@@ -1,1 +1,29 @@
-<p>person-details works!</p>
+<div class="container">
+  <div *ngIf="person">
+    <h2>Person Astronaut Details</h2>
+    <p><strong>Person ID:</strong> {{ person.personId }}</p>
+    <p><strong>Name:</strong> {{ person.name }}</p>
+
+    <p *ngIf="person.currentRank">
+      <strong>Current Rank:</strong> {{ person.currentRank }}
+    </p>
+
+    <p *ngIf="person.currentDutyTitle">
+      <strong>Current Duty Title:</strong> {{ person.currentDutyTitle }}
+    </p>
+
+    <p *ngIf="person.careerStartDate">
+      <strong>Career Start Date:</strong> {{ person.careerStartDate | date:'mediumDate' }}
+    </p>
+
+    <p *ngIf="person.careerEndDate">
+      <strong>Career End Date:</strong> {{ person.careerEndDate | date:'mediumDate' }}
+    </p>
+  </div>
+
+  <div *ngIf="!person">
+    <p>No astronaut data available.</p>
+  </div>
+
+</div>
+

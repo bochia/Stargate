@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PersonAstronautDto } from '../models/PersonAstronautDto';
 
 @Component({
   selector: 'acts-person-directory',
@@ -72,13 +73,4 @@ export class PersonDirectoryComponent {
   }
 }
 
-
-// ochia - where should I put this?
-export interface PersonAstronautDto {
-  personId: number;
-  name: string;
-  currentRank?: string;
-  currentDutyTitle?: string;
-  careerStartDate?: Date;
-  careerEndDate?: Date;
-}
+export { PersonAstronautDto };
