@@ -8,7 +8,6 @@ import { GetPeopleApiResponse } from '../models/GetPeopleApiResponse';
   providedIn: 'root'
 })
 
-// ochia - would like to make a folder for services.
 export class PeopleService {
 
   constructor(private httpClient: HttpClient) { }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Stargate.Server.Data.Models
 {
-    // ochia - need to delete this class from the DB if it really isnt needed.
+    // ochia - need to delete this class from the DB. I dont see a purpose for it. Its more like a DTO.
     [Keyless]
     public class PersonAstronaut
     {

@@ -40,6 +40,7 @@ namespace Stargate.Server.Controllers
             }
         }
 
+        // ochia - If I had more time I would change this to go off of the ID of the person.
         [HttpGet("{name}")]
         public async Task<IActionResult> GetPersonByName(string name)
         {

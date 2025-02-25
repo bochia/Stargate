@@ -13,10 +13,13 @@ namespace Stargate.Server.Data.Models
 
         public string Rank { get; set; } = string.Empty;
 
+        // ochia - property name doesn't need duty in it". This is redundant.
         public string DutyTitle { get; set; } = string.Empty;
 
+        // ochia - property name doesn't need duty in it". This is redundant.
         public DateTime DutyStartDate { get; set; }
-
+        
+        // ochia - property name doesn't need duty in it". This is redundant.
         public DateTime? DutyEndDate { get; set; }
 
         public virtual Person Person { get; set; }

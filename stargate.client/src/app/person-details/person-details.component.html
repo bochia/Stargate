@@ -1,7 +1,7 @@
 <div class="container">
   <div *ngIf="person">
     <h2>{{ person.name }}</h2>
-    <p><strong>Person ID:</strong> {{ person.personId }}</p>
+    <p><strong>ID:</strong> {{ person.personId }}</p>
 
     <p>
       <strong>Current Rank:</strong> {{ getValueForUI(person.currentRank)}}
@@ -24,5 +24,28 @@
     <p>No astronaut data available.</p>
   </div>
 
+</div>
+
+<div *ngIf="duties && duties.length > 0" class="container mt-4"><br />
+  <h3>Astronaut Duties</h3>
+  <table class="table table-hover table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Rank</th>
+        <th>Duty Title</th>
+        <th>Duty Start Date</th>
+        <th>Duty End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through people array and display each person -->
+      <tr *ngFor="let duty of duties">
+        <td>{{ getValueForUI(duty.rank) }}</td>
+        <td>{{ getValueForUI(duty.dutyTitle) }}</td>
+        <td>{{ getValueForUI(duty.dutyStartDate | date:'shortDate') }}</td>
+        <td>{{ getValueForUI(duty.dutyEndDate | date:'shortDate') }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 

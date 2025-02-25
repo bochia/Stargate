@@ -16,8 +16,9 @@ namespace Stargate.Server.Controllers
             _mediator = mediator;
         }
 
+        // ochia - If I had more time I would change this to go off of the ID of the person.
         [HttpGet("{personName}")]
-        public async Task<IActionResult> GetAstronautDutiesByName(string personName)// ochia - rename this method based on response from questions.
+        public async Task<IActionResult> GetAstronautDutiesByName(string personName)
         {
             try
             {
@@ -40,7 +41,7 @@ namespace Stargate.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAstronautDuty([FromBody] CreateAstronautDutyRequest request) // ochia - rename this method based on response from questions.
+        public async Task<IActionResult> CreateAstronautDuty([FromBody] CreateAstronautDutyRequest request)
         {
             var result = await _mediator.Send(request);
             return this.GetResponse(result);

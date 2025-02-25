@@ -16,8 +16,23 @@ namespace Stargate.Server.Business.Queries
 
     public class GetAstronautDutiesByNameResult : BaseResponse
     {
-        public PersonAstronautDto Person { get; set; }
-        public List<AstronautDuty> AstronautDuties { get; set; } = new List<AstronautDuty>();
+        public List<AstronautDutyDto> AstronautDuties { get; set; } = new List<AstronautDutyDto>();
+    }
+
+    public class AstronautDutyDto
+    {
+        public int Id { get; set; }
+
+        public int PersonId { get; set; }
+
+        public string Rank { get; set; } = string.Empty;
+
+        public string DutyTitle { get; set; } = string.Empty;
+
+        public DateTime DutyStartDate { get; set; }
+
+        public DateTime? DutyEndDate { get; set; }
+
     }
 
     public class GetAstronautDutiesByNameHandler : IRequestHandler<GetAstronautDutiesByNameRequest, GetAstronautDutiesByNameResult>
@@ -49,8 +64,7 @@ namespace Stargate.Server.Business.Queries
                 };
             }
 
-            result.Person = person.ConvertToDto();
-            result.AstronautDuties = person.AstronautDuties.ToList();
+            result.AstronautDuties = person.AstronautDuties.ConvertToDto();
 
             return result;
         }

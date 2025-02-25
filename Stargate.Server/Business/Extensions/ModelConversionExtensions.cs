@@ -53,5 +53,25 @@
 
             return personAstronautDtos;
         }
+
+        public static List<AstronautDutyDto> ConvertToDto(this IEnumerable<AstronautDuty> astronautDuties) 
+        {
+            List<AstronautDutyDto> astronautDutyDtos = new List<AstronautDutyDto>();
+
+            foreach( var duty in astronautDuties)
+            {
+                astronautDutyDtos.Add(new AstronautDutyDto()
+                {
+                    Id = duty.Id,
+                    PersonId = duty.PersonId,
+                    Rank = duty.Rank,
+                    DutyTitle = duty.DutyTitle,
+                    DutyStartDate = duty.DutyStartDate,
+                    DutyEndDate = duty.DutyEndDate,
+                });
+            }
+
+            return astronautDutyDtos;
+        }
     }
 }

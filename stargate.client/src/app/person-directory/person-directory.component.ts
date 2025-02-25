@@ -28,14 +28,7 @@ export class PersonDirectoryComponent {
     return value;
   }
 
-  filterTable() {
-    // ochia - need to add real filtering later.
-    this.people =  [
-      { personId: 1, name: 'Neil Armstrong', currentRank: 'Commander', currentDutyTitle: 'Apollo 11', careerStartDate: new Date('1966-03-16'), careerEndDate: new Date('1969-07-24') },
-      { personId: 2, name: 'Buzz Aldrin', currentRank: 'Lunar Module Pilot', currentDutyTitle: 'Apollo 11', careerStartDate: new Date('1966-03-16'), careerEndDate: new Date('1969-07-24') },
-      { personId: 3, name: 'Sally Ride', currentRank: 'Mission Specialist', currentDutyTitle: 'STS-7', careerStartDate: new Date('1978-01-16'), careerEndDate: new Date('1987-08-15') },
-    ];
-  }
+  // ochia - want to add search functionality to this with a textbox, button and pass the search value into this and then filter down the list.
 }
 
 export { PersonAstronautDto };
