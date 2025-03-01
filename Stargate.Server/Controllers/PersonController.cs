@@ -104,6 +104,8 @@ namespace Stargate.Server.Controllers
 
         }
 
+
+        //ochia - use patch.
         [HttpPut]
         public async Task<IActionResult> UpdatePerson([FromBody] UpdatePersonRequest updatePersonRequest)
         {
